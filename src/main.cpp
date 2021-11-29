@@ -175,12 +175,12 @@ void loop()
     Serial.print(xAngleAcX);
     Serial.print("\t FilteredX:");
     Serial.print(xAngleFiX);
-    Serial.print("\n\t AngleAcY:");
+    Serial.print("\n AngleAcY:");
     Serial.print(yAngleAcY);
     Serial.print("\t FilteredY:");
     Serial.println(yAngleFiY);
     // zAngleGyZ => zAngleAcZ;
-    Serial.print("\n\t AngleAcZ:");
+    Serial.print("\n AngleAcZ:");
     Serial.print(zAngleAcZ);
     Serial.print("\t FilteredZ:");
     Serial.println(zAngleFiZ);
