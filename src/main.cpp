@@ -111,52 +111,11 @@ void loop()
     mpu.getEvent(&a, &g, &temp);
 
     /* Print out the values */
-    // Serial.print("Acceleration[m/s^2]: ");
-    // Serial.print(a.acceleration.x);
-    // Serial.print(",");
-    // Serial.print(a.acceleration.y);
-    // Serial.print(",");
-    // Serial.print(a.acceleration.z);
-    // Serial.print(", ");
-    // Serial.println("\n");
-
-    // x_v = x_v + double(a.acceleration.x * getTime);
-    // y_v = y_v + double(a.acceleration.x * getTime);
-    // z_v = z_v + double(a.acceleration.x * getTime);
-
-    // x_pos = x_pos + (x_v * (DELAY / 1000)) + (0.5 * a.acceleration.x * pow(getTime, 2));
-    // y_pos = y_pos + (x_v * (DELAY / 1000)) + (0.5 * a.acceleration.y * pow(getTime, 2));
-    // z_pos = z_pos + (x_v * (DELAY / 1000)) + (0.5 * a.acceleration.z * pow(getTime, 2));
-
-    // // Serial.print("Velocity[m/s]: ");
-    // Serial.print("Position[m]: ");
-    // Serial.print(x_pos);
-    // Serial.print(", ");
-    // Serial.print(y_pos);
-    // Serial.print(", ");
-    // Serial.print(z_pos);
-    // Serial.println("\n");
 
     // Acceleration Angle
     xAngleAcX = atan(-a.acceleration.x / sqrt(pow(a.acceleration.y, 2) + pow(a.acceleration.z, 2))) * RADIAN_TO_DEGREE;
     yAngleAcY = atan(-a.acceleration.y / sqrt(pow(a.acceleration.x, 2) + pow(a.acceleration.z, 2))) * RADIAN_TO_DEGREE;
     zAngleAcZ = atan(-a.acceleration.z / sqrt(pow(a.acceleration.x, 2) + pow(a.acceleration.y, 2))) * RADIAN_TO_DEGREE;
-
-    // Serial.print("Angle[DEGREE]: ");
-    // Serial.print(xAngleAcX);
-    // Serial.print(", ");
-    // Serial.print(yAngleAcY);
-    // Serial.print(", ");
-    // Serial.print(zAngleAcZ);
-    // Serial.println("\n");
-
-    // Serial.print("angular speed[rad/s]: ");
-    // Serial.print(g.gyro.x);
-    // Serial.print(",");
-    // Serial.print(g.gyro.y);
-    // Serial.print(",");
-    // Serial.print(g.gyro.z);
-    // Serial.println("\n");
 
     // Gyro Angle
     xAngleGyX = (g.gyro.x - averGyX) / DEG_PER_SEC * dt;
