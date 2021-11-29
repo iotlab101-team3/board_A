@@ -185,18 +185,6 @@ void loop()
     Serial.print("\t FilteredZ:");
     Serial.println(zAngleFiZ);
 
-    // x_rad = x_rad + (g.gyro.x * getTime);
-    // y_rad = y_rad + (g.gyro.y * getTime);
-    // z_rad = z_rad + (g.gyro.z * getTime);
-
-    // Serial.print("angle[rad]: ");
-    // Serial.print(x_rad);
-    // Serial.print(",");
-    // Serial.print(y_rad);
-    // Serial.print(",");
-    // Serial.print(z_rad);
-    // Serial.println("\n");
-
     delay(DELAY); // 《
 }
 
