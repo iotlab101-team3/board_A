@@ -23,12 +23,6 @@ double xAngleInit, yAngleInit, zAngleInit;
 
 const double RADIAN_TO_DEGREE = 180 / 3.14159;
 
-int main() // 경로에 역슬래쉬 2번씩
-{
-PlaySound(TEXT("C:\\Users\\CY\\Desktop\\IoT_sound\\drum_wav\\Crash.wav"), 0, SND_FILENAME);
-}
-
-
 void setup(void)
 {
     Serial.begin(115200);
@@ -52,6 +46,11 @@ void setup(void)
     mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
     Serial.println("");
     delay(100);
+
+    PlaySound(TEXT("C:\\Users\\CY\\Desktop\\IoT_sound\\drum_wav\\Crash.wav"), 0, SND_FILENAME);
+
+
+
 }
 
 void loop()
