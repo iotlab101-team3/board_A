@@ -5,6 +5,12 @@
 #include <Wire.h>
 #include <math.h>
 
+//palySound 함수 이용 사운드 파일 재생
+#include<stdio.h>
+#include<Windows.h>
+#include<mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+
 Adafruit_MPU6050 mpu;
 int DELAY = 200;
 double x_rad, y_rad, z_rad;
@@ -16,6 +22,12 @@ double xAngle, yAngle, zAngle;
 double xAngleInit, yAngleInit, zAngleInit;
 
 const double RADIAN_TO_DEGREE = 180 / 3.14159;
+
+int main() // 경로에 역슬래쉬 2번씩
+{
+PlaySound(TEXT("C:\\Users\\CY\\Desktop\\IoT_sound\\drum_wav\\Crash.wav"), 0, SND_FILENAME);
+}
+
 
 void setup(void)
 {
@@ -115,3 +127,5 @@ void loop()
 
     delay(DELAY); // 《 자이로 Gyro 센서로 Roll과 Pitch, Yaw의 각도 구하기 실습  》
 }
+
+
