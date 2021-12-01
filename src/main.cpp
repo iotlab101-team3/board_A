@@ -1,7 +1,6 @@
 
 #include <Wire.h>
 #include <Arduino.h>
-#include <stdio.h>
 #include <windows.h>
 #include <MMsystem.h>
 
