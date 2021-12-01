@@ -119,7 +119,7 @@ void loop()
 
     if (angleGyZ >= 90)
         angleGyZ = 90;
-    if (angleGyZ <= -90)
+    else if (angleGyZ <= -90)
         angleGyZ = -90;
     if (angleFiZ >= 90)
         angleFiZ = 90;
