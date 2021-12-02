@@ -1,8 +1,9 @@
-
 #include <Wire.h>
 #include <Arduino.h>
-#include <windows.h>
-#include <MMsystem.h>
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+
+int angle = 0; //mqtt에 전달하는 값
 
 const int MPU_ADDR = 0x68;                 // I2C통신을 위한 MPU6050의 주소
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ; // 가속도(Acceleration)와 자이로(Gyro)
@@ -25,6 +26,17 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
+ 
+const char*         ssid ="KT_GiGA_4C6F";
+const char*         password = "0ebe01ge28";
+const char*         mqttServer = "3.84.34.84";
+const int           mqttPort = 1883;
+
+unsigned long       pubInterval = 5000;
+unsigned long       lastPublished = - pubInterval;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 void initSensor()
 {
@@ -89,10 +101,31 @@ void setup()
     Serial.begin(115200);
     caliSensor();    //  초기 센서 캘리브레이션 함수 호출
     past = millis(); // past에 현재 시간 저장
+
+    WiFi.mode(WIFI_STA); 
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println("Connected to the WiFi network");
+    client.setServer(mqttServer, mqttPort);
+ 
+    while (!client.connected()) {
+        Serial.println("Connecting to MQTT...");
+ 
+        if (client.connect("mj")) {
+            Serial.println("connected");  
+        } else {
+            Serial.print("failed with state "); Serial.println(client.state());
+            delay(2000);
+        }
+    }
 }
 
 void loop()
 {
+    client.loop();
     getData();
     getDT();
 
@@ -144,26 +177,22 @@ void loop()
     {
         if (angleGyZ >= -30 && angleGyZ < 0)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Tom2.wav"), 0, SND_FILENAME);
-            delay(50);
+            angle = 1;
         }
 
         else if (angleGyZ >= 0 && angleGyZ < 30)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Tom3.wav"), 0, SND_FILENAME);
-            delay(50);
+            angle = 2;
         }
 
         else if (angleGyZ >= -90 && angleGyZ < -60)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Snare.wav"), 0, SND_FILENAME);
-            delay(50);
+            angle = 3;
         }
 
         else if (angleGyZ >= 60 && angleGyZ < 90)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Floor.wav"), 0, SND_FILENAME);
-            delay(50);
+            angle = 4;
         }
     }
 
@@ -171,13 +200,21 @@ void loop()
     {
         if (angleGyZ >= -60 && angleGyZ < -30)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Crash.wav"), 0, SND_FILENAME);
+            angle = 5;
         }
 
         else if (angleGyZ >= 30 && angleGyZ < 60)
         {
-            PlaySound(TEXT("C:\\Users\\김종민\\OneDrive\\문서\\PlatformIO\\Projects\\week13\\AIR_DRUM_ANGLE_TEST\\드럼소리\\Ride.wav"), 0, SND_FILENAME);
+            angle = 6;
         }
+    }
+
+    unsigned long currentMillis = millis();
+    if(currentMillis - lastPublished >= pubInterval) {
+        lastPublished = currentMillis;
+        char buf[10];
+        sprintf(buf, "%d", angle);
+        client.publish("deviceid/mj/evt/angle", buf);
     }
 }
 
