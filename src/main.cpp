@@ -117,12 +117,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 void setup()
 {
+    pinMode(speaker,OUTPUT);
+    
     initSensor();
     Serial.begin(115200);
     caliSensor();    //  초기 센서 캘리브레이션 함수 호출
     past = millis(); // past에 현재 시간 저장
 
-    pinMode(speaker,OUTPUT);
 
     WiFi.mode(WIFI_STA); 
     WiFi.begin(ssid, password);

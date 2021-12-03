@@ -5,6 +5,8 @@ import wave
 topic = "deviceid/mj/angle"
 server = "3.84.34.84"
 
+path = 'Tom3.wav'
+
 chunk = 1024
 
 def on_connect(client, userdata, flags, rc):
