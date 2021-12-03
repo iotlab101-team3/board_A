@@ -7,8 +7,6 @@
 
 //palySound 함수 이용 사운드 파일 재생
 #include<stdio.h>
-// #include<Windows.h>
-// #include<mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
 Adafruit_MPU6050 mpu;
