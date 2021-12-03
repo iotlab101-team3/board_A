@@ -7,8 +7,8 @@
 
 //palySound 함수 이용 사운드 파일 재생
 #include<stdio.h>
-#include<Windows.h>
-#include<mmsystem.h>
+// #include<Windows.h>
+// #include<mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
 Adafruit_MPU6050 mpu;
@@ -46,11 +46,6 @@ void setup(void)
     mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
     Serial.println("");
     delay(100);
-
-    PlaySound(TEXT("C:\\Users\\CY\\Desktop\\IoT_sound\\drum_wav\\Crash.wav"), 0, SND_FILENAME);
-
-
-
 }
 
 void loop()
