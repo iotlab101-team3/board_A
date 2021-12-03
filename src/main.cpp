@@ -3,6 +3,8 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
+#define speaker 14
+
 int angle = 0; //mqtt에 전달하는 값
 
 const int MPU_ADDR = 0x68;                 // I2C통신을 위한 MPU6050의 주소
@@ -27,8 +29,8 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
  
-const char*         ssid ="KT_GiGA_4C6F";
-const char*         password = "0ebe01ge28";
+const char*         ssid ="IoT518";
+const char*         password = "iot123456";
 const char*         mqttServer = "3.84.34.84";
 const int           mqttPort = 1883;
 
@@ -37,6 +39,7 @@ unsigned long       lastPublished = - pubInterval;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
+const char* topic = "deviceid/jj/cmd/wav";
 
 void initSensor()
 {
@@ -95,6 +98,23 @@ void caliSensor()
     averGyZ = sumGyZ / 10;
 }
 
+void callback(char* topic, byte* payload, unsigned int length) {
+    
+    int i;
+    String Message = "";
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
+
+    while (i < length){
+      Message += (char)payload [i++];
+    } 
+    Serial.println();
+    Serial.println(Message);
+
+    //wav파일에 따른 동작 작용은 여기다 넣기
+}
+
 void setup()
 {
     initSensor();
@@ -102,25 +122,30 @@ void setup()
     caliSensor();    //  초기 센서 캘리브레이션 함수 호출
     past = millis(); // past에 현재 시간 저장
 
+    pinMode(speaker,OUTPUT);
+
     WiFi.mode(WIFI_STA); 
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.print(".");
     }
+
     Serial.println("Connected to the WiFi network");
+
     client.setServer(mqttServer, mqttPort);
- 
     while (!client.connected()) {
         Serial.println("Connecting to MQTT...");
- 
-        if (client.connect("mj")) {
+        if (client.connect("jj")) {
             Serial.println("connected");  
-        } else {
+        } 
+        else {
             Serial.print("failed with state "); Serial.println(client.state());
             delay(2000);
         }
     }
+    client.subscribe(topic);
+    client.setCallback(callback);
 }
 
 void loop()
