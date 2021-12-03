@@ -214,7 +214,7 @@ void loop()
             angle = 6;
         }
     }
-    else angle = 7;
+    else angle = 0;
 
     unsigned long currentMillis = millis();
     if(currentMillis - lastPublished >= pubInterval) {
