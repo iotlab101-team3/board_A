@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import pyaudio
+import pyaudio
 import wave
 
 topic = "deviceid/mj/angle"
@@ -28,6 +29,7 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 client.loop_forever()
+path = 'Tom2.wav' 
 
 with wave.open(path, 'rb') as f:
     p = pyaudio.PyAudio()
