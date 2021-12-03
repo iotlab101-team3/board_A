@@ -29,8 +29,8 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
  
-const char*         ssid ="IoT518";
-const char*         password = "iot123456";
+const char*         ssid ="KT_GiGA_4C6F";
+const char*         password = "0ebe01ge28";
 const char*         mqttServer = "3.84.34.84";
 const int           mqttPort = 1883;
 
@@ -39,7 +39,6 @@ unsigned long       lastPublished = - pubInterval;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-const char* topic = "deviceid/jj/cmd/wav";
 
 void initSensor()
 {
@@ -98,32 +97,6 @@ void caliSensor()
     averGyZ = sumGyZ / 10;
 }
 
-void callback(char* topic, byte* payload, unsigned int length) {
-    
-    int i;
-    String Message = "";
-    Serial.print("Message arrived [");
-    Serial.print(topic);
-    Serial.print("] ");
-
-    while (i < length){
-      Message += (char)payload [i++];
-    } 
-    Serial.println();
-    Serial.println(Message);
-
-    //wav파일에 따른 동작 작용은 여기다 넣기
-    if(Message == "Tom2.wav")
-    {
-        digitalWrite(speaker, HIGH);
-    }
-    else if(Message == "Tom3.wav")
-    {
-        digitalWrite(speaker, HIGH);
-    }
-
-}
-
 void setup()
 {
     pinMode(speaker,OUTPUT);
@@ -146,7 +119,7 @@ void setup()
     client.setServer(mqttServer, mqttPort);
     while (!client.connected()) {
         Serial.println("Connecting to MQTT...");
-        if (client.connect("jj")) {
+        if (client.connect("team3")) {
             Serial.println("connected");  
         } 
         else {
@@ -154,8 +127,6 @@ void setup()
             delay(2000);
         }
     }
-    client.subscribe(topic);
-    client.setCallback(callback);
 }
 
 void loop()
@@ -243,13 +214,14 @@ void loop()
             angle = 6;
         }
     }
+    else angle = 0;
 
     unsigned long currentMillis = millis();
     if(currentMillis - lastPublished >= pubInterval) {
         lastPublished = currentMillis;
         char buf[10];
         sprintf(buf, "%d", angle);
-        client.publish("deviceid/mj/evt/angle", buf);
+        client.publish("deviceid/team3/evt/angle", buf);
     }
 }
 

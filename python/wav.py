@@ -1,12 +1,9 @@
 import paho.mqtt.client as mqtt
 import pyaudio
-import pyaudio
 import wave
 
-topic = "deviceid/mj/angle"
+topic = "deviceid/team3/evt/angle"
 server = "3.84.34.84"
-
-path = 'Tom3.wav'
 
 chunk = 1024
 
@@ -15,13 +12,118 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(topic)
 
 def on_message(client, userdata, msg):
+    global path
+
     print(msg.topic+" "+str(msg.payload.decode('UTF-8')))
     if int(msg.payload.decode('UTF-8')) == 1:
-        client.publish("deviceid/jj/cmd/wav", "Tom2.wav")
         path = 'Tom2.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 2:
-        client.publish("deviceid/jj/cmd/wav", "Tom3.wav")
         path = 'Tom3.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
+    elif int(msg.payload.decode('UTF-8')) == 3:
+        path = 'Scare.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
+    elif int(msg.payload.decode('UTF-8')) == 4:
+        path = 'Floor.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
+    elif int(msg.payload.decode('UTF-8')) == 5:
+        path = 'Crash.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
+    elif int(msg.payload.decode('UTF-8')) == 6:
+        path = 'Ride.wav'
+        with wave.open(path, 'rb') as f:
+            p = pyaudio.PyAudio()
+            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
+                            channels = f.getnchannels(),
+                            rate = f.getframerate(),
+                            output = True)
+
+            data = f.readframes(chunk)
+            while data:
+                stream.write(data)
+                data = f.readframes(chunk)
+
+            stream.stop_stream()
+            stream.close()
+
+            p.terminate()
+
 
 client = mqtt.Client()
 client.connect(server, 1883, 60)
@@ -29,21 +131,3 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 client.loop_forever()
-path = 'Tom2.wav' 
-
-with wave.open(path, 'rb') as f:
-    p = pyaudio.PyAudio()
-    stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                    channels = f.getnchannels(),
-                    rate = f.getframerate(),
-                    output = True)
-
-    data = f.readframes(chunk)
-    while data:
-        stream.write(data)
-        data = f.readframes(chunk)
-
-    stream.stop_stream()
-    stream.close()
-
-    p.terminate()
