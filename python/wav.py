@@ -1,9 +1,9 @@
-import pyaudio
+import pyaudio # pip install pipwin 하고 pipwin install pyaudio
 import wave
 
 chunk = 1024
 
-path = 'C:\Users\hp\Desktop\드럼소리\Tom2.wav'
+path = 'Tom2.wav' # 가상 환경에서 돌려야함
 
 with wave.open(path, 'rb') as f:
     p = pyaudio.PyAudio()
