@@ -4,6 +4,7 @@
 
 .venv 환경 설정을 해준다.
 activate 해준 다음 pyaudio 라이브러리 깔 것!
+
 cd python
 
 python wav.py 실행
