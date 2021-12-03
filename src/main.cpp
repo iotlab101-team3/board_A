@@ -113,6 +113,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.println(Message);
 
     //wav파일에 따른 동작 작용은 여기다 넣기
+    if(Message == "Tom2.wav")
+    {
+        digitalWrite(speaker, HIGH);
+    }
+    else if(Message == "Tom3.wav")
+    {
+        digitalWrite(speaker, HIGH);
+    }
+
 }
 
 void setup()
