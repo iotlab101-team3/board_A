@@ -29,8 +29,8 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
  
-const char*         ssid ="KT_GiGA_4C6F";
-const char*         password = "0ebe01ge28";
+const char*         ssid ="KT_GiGA_4C6F";   // 희정 : KT_GiGA_2G_1F1E
+const char*         password = "0ebe01ge28";    // 희정 : dcgb2ed245
 const char*         mqttServer = "3.84.34.84";
 const int           mqttPort = 1883;
 
