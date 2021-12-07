@@ -34,7 +34,7 @@ const char*         password = "2009024098";    // 희정 : dcgb2ed245  연빈: 
 const char*         mqttServer = "3.84.34.84";
 const int           mqttPort = 1883;
 
-unsigned long       pubInterval = 5000;
+unsigned long       pubInterval = 500;
 unsigned long       lastPublished = - pubInterval;
 
 WiFiClient espClient;
@@ -215,6 +215,8 @@ void loop()
         }
     }
     else angle = 0;
+
+    Serial.print("현재 값: "); Serial.println(angle);
 
     unsigned long currentMillis = millis();
     if(currentMillis - lastPublished >= pubInterval) {
