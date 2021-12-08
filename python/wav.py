@@ -7,22 +7,24 @@ server = "3.84.34.84"
 
 chunk = 1024
 
+
 def on_connect(client, userdata, flags, rc):
     print("Connected with RC : " + str(rc))
     client.subscribe(topic)
+
 
 def on_message(client, userdata, msg):
     global path
 
     print(msg.topic+" "+str(msg.payload.decode('UTF-8')))
     if int(msg.payload.decode('UTF-8')) == 1:
-        path = 'OpenHH.wav'
+        path = 'closehh.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
@@ -34,13 +36,13 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 2:
-        path = 'Crash.wav'
+        path = 'crash.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
@@ -52,13 +54,13 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 3:
-        path = 'Scare.wav'
+        path = 'scare.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
@@ -70,13 +72,13 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 4:
-        path = 'Tom1.wav'
+        path = 'tom1.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
@@ -88,13 +90,13 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 5:
-        path = 'Tom2.wav'
+        path = 'tom2.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
@@ -106,13 +108,13 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 6:
-        path = 'Tom3.wav'
+        path = 'tom3.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
-            stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
-                            channels = f.getnchannels(),
-                            rate = f.getframerate(),
-                            output = True)
+            stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                            channels=f.getnchannels(),
+                            rate=f.getframerate(),
+                            output=True)
 
             data = f.readframes(chunk)
             while data:
