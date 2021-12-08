@@ -40,6 +40,17 @@ unsigned long lastPublished = -pubInterval;
 WiFiClient espClient;
 PubSubClient client(espClient);
 const char *topic = "deviceid/jj/cmd/wav";
+ 
+const char*         ssid ="Gogle";   // 희정 : KT_GiGA_2G_1F1E 연빈 : SK_WiFiGIGA4AB4
+const char*         password = "20010228";    // 희정 : dcgb2ed245  연빈: 2009024098
+const char*         mqttServer = "3.84.34.84";
+const int           mqttPort = 1883;
+
+unsigned long       pubInterval = 1000;
+unsigned long       lastPublished = - pubInterval;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 void initSensor()
 {
@@ -148,6 +159,7 @@ void setup()
     while (!client.connected())
     {
         Serial.println("Connecting to MQTT...");
+
         if (client.connect("jj"))
         {
             Serial.println("connected");
@@ -156,11 +168,16 @@ void setup()
         {
             Serial.print("failed with state ");
             Serial.println(client.state());
+
+        if (client.connect("team3")) {
+            Serial.println("connected");  
+        } 
+        else {
+            Serial.print("failed with state "); Serial.println(client.state());
+
             delay(2000);
         }
     }
-    client.subscribe(topic);
-    client.setCallback(callback);
 }
 
 void loop()
@@ -263,6 +280,9 @@ void loop()
             angle = 5;
         }
     }
+    else angle = 0;
+
+    Serial.print("현재 값: "); Serial.println(angle);
 
     unsigned long currentMillis = millis();
     if (currentMillis - lastPublished >= pubInterval)
@@ -270,7 +290,7 @@ void loop()
         lastPublished = currentMillis;
         char buf[10];
         sprintf(buf, "%d", angle);
-        client.publish("deviceid/mj/evt/angle", buf);
+        client.publish("deviceid/team3/evt/angle", buf);
     }
 }
 
