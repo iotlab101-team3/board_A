@@ -5,8 +5,8 @@
 
 #define speaker 14
 
-int angle = 0; //mqtt에 전달하는 값
-
+int angle = 0; // mqtt에 전달하는 값
+// int light = 0; // 조도 센서
 const int MPU_ADDR = 0x68;                 // I2C통신을 위한 MPU6050의 주소
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ; // 가속도(Acceleration)와 자이로(Gyro)
 double angleAcX, angleAcY, angleAcZ;
@@ -28,6 +28,18 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
+
+const char *ssid = "IoT518";
+const char *password = "iot123456";
+const char *mqttServer = "3.84.34.84";
+const int mqttPort = 1883;
+
+unsigned long pubInterval = 5000;
+unsigned long lastPublished = -pubInterval;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+const char *topic = "deviceid/jj/cmd/wav";
  
 const char*         ssid ="Gogle";   // 희정 : KT_GiGA_2G_1F1E 연빈 : SK_WiFiGIGA4AB4
 const char*         password = "20010228";    // 희정 : dcgb2ed245  연빈: 2009024098
@@ -97,19 +109,46 @@ void caliSensor()
     averGyZ = sumGyZ / 10;
 }
 
+void callback(char *topic, byte *payload, unsigned int length)
+{
+
+    int i;
+    String Message = "";
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
+
+    while (i < length)
+    {
+        Message += (char)payload[i++];
+    }
+    Serial.println();
+    Serial.println(Message);
+
+    // wav파일에 따른 동작 작용은 여기다 넣기
+    if (Message == "Tom2.wav")
+    {
+        digitalWrite(speaker, HIGH);
+    }
+    else if (Message == "Tom3.wav")
+    {
+        digitalWrite(speaker, HIGH);
+    }
+}
+
 void setup()
 {
-    pinMode(speaker,OUTPUT);
-    
+    pinMode(speaker, OUTPUT);
+
     initSensor();
     Serial.begin(115200);
     caliSensor();    //  초기 센서 캘리브레이션 함수 호출
     past = millis(); // past에 현재 시간 저장
 
-
-    WiFi.mode(WIFI_STA); 
+    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
+    while (WiFi.status() != WL_CONNECTED)
+    {
         delay(500);
         Serial.print(".");
     }
@@ -117,13 +156,25 @@ void setup()
     Serial.println("Connected to the WiFi network");
 
     client.setServer(mqttServer, mqttPort);
-    while (!client.connected()) {
+    while (!client.connected())
+    {
         Serial.println("Connecting to MQTT...");
+
+        if (client.connect("jj"))
+        {
+            Serial.println("connected");
+        }
+        else
+        {
+            Serial.print("failed with state ");
+            Serial.println(client.state());
+
         if (client.connect("team3")) {
             Serial.println("connected");  
         } 
         else {
             Serial.print("failed with state "); Serial.println(client.state());
+
             delay(2000);
         }
     }
@@ -131,6 +182,7 @@ void setup()
 
 void loop()
 {
+    int lux = analogRead(0);
     client.loop();
     getData();
     getDT();
@@ -179,26 +231,40 @@ void loop()
     Serial.println(angleFiZ);
 
     // 파일 경로는 자신의 파일 경로로  변경
+    if (lux < 22)
+    {
+        angle = 7;
+        Serial.println("ON");
+    }
+
+    else
+    {
+        Serial.println("OFF");
+    }
+
+    Serial.println(lux);
+    delay(100);
+
     if (angleFiX <= 10)
     {
         if (angleGyZ >= -30 && angleGyZ < 0)
         {
-            angle = 1;
+            angle = 3;
         }
 
         else if (angleGyZ >= 0 && angleGyZ < 30)
         {
-            angle = 2;
+            angle = 4;
         }
 
         else if (angleGyZ >= -90 && angleGyZ < -60)
         {
-            angle = 3;
+            angle = 1;
         }
 
         else if (angleGyZ >= 60 && angleGyZ < 90)
         {
-            angle = 4;
+            angle = 6;
         }
     }
 
@@ -206,12 +272,12 @@ void loop()
     {
         if (angleGyZ >= -60 && angleGyZ < -30)
         {
-            angle = 5;
+            angle = 2;
         }
 
         else if (angleGyZ >= 30 && angleGyZ < 60)
         {
-            angle = 6;
+            angle = 5;
         }
     }
     else angle = 0;
@@ -219,7 +285,8 @@ void loop()
     Serial.print("현재 값: "); Serial.println(angle);
 
     unsigned long currentMillis = millis();
-    if(currentMillis - lastPublished >= pubInterval) {
+    if (currentMillis - lastPublished >= pubInterval)
+    {
         lastPublished = currentMillis;
         char buf[10];
         sprintf(buf, "%d", angle);
@@ -227,6 +294,38 @@ void loop()
     }
 }
 
+/////////////////////////
+// light
+// #include <Arduino.h>
+
+// int x;
+
+// void setup()
+// {
+//   Serial.begin(115200);
+
+// }
+
+// void loop()
+// {
+//  int lux = analogRead(0);
+//  }
+
+//   if (lux < 22)
+//   {
+//     x = 0;
+//     Serial.printf("ON: x = %d\n", x);
+//   }
+
+//   else
+//   {
+//     x = 1;
+//     Serial.printf("OFF: x = %d\n", x);
+//   }
+
+//   Serial.println(lux);
+//   delay(100);
+// }
 //////////////////////////////////////////////////////////////////////////////////////
 /* 유튜브 링크 코드 */
 // https://www.notion.so/IoT-1ce91dd2e1654c26aa90494557632e4b#9b810ee0da054a07bf10da85282f576b //
