@@ -16,7 +16,7 @@ def on_message(client, userdata, msg):
 
     print(msg.topic+" "+str(msg.payload.decode('UTF-8')))
     if int(msg.payload.decode('UTF-8')) == 1:
-        path = 'Tom2.wav'
+        path = 'OpenHH.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
             stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
@@ -34,7 +34,7 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 2:
-        path = 'Tom3.wav'
+        path = 'Crash.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
             stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
@@ -70,7 +70,7 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 4:
-        path = 'Floor.wav'
+        path = 'Tom1.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
             stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
@@ -88,7 +88,7 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 5:
-        path = 'Crash.wav'
+        path = 'Tom2.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
             stream = p.open(format = p.get_format_from_width(f.getsampwidth()),
@@ -106,7 +106,7 @@ def on_message(client, userdata, msg):
 
             p.terminate()
     elif int(msg.payload.decode('UTF-8')) == 6:
-        path = 'Ride.wav'
+        path = 'Tom3.wav'
         with wave.open(path, 'rb') as f:
             p = pyaudio.PyAudio()
             stream = p.open(format = p.get_format_from_width(f.getsampwidth()),

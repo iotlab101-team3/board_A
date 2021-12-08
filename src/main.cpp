@@ -29,12 +29,12 @@ double dt = 0;          // 한 사이클 동안 걸린 시간 변수
 double averAcX, averAcY, averAcZ;
 double averGyX, averGyY, averGyZ;
  
-const char*         ssid ="SK_WiFiGIGA4AB4";   // 희정 : KT_GiGA_2G_1F1E 연빈 : SK_WiFiGIGA4AB4
-const char*         password = "2009024098";    // 희정 : dcgb2ed245  연빈: 2009024098
+const char*         ssid ="Gogle";   // 희정 : KT_GiGA_2G_1F1E 연빈 : SK_WiFiGIGA4AB4
+const char*         password = "20010228";    // 희정 : dcgb2ed245  연빈: 2009024098
 const char*         mqttServer = "3.84.34.84";
 const int           mqttPort = 1883;
 
-unsigned long       pubInterval = 5000;
+unsigned long       pubInterval = 1000;
 unsigned long       lastPublished = - pubInterval;
 
 WiFiClient espClient;
@@ -215,6 +215,8 @@ void loop()
         }
     }
     else angle = 0;
+
+    Serial.print("현재 값: "); Serial.println(angle);
 
     unsigned long currentMillis = millis();
     if(currentMillis - lastPublished >= pubInterval) {
