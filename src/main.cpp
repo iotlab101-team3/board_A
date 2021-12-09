@@ -8,6 +8,7 @@
 int loopcount = 0;
 
 int angle = 0; // mqtt에 전달하는 값
+int action = 0;
 
 const int MPU_ADDR = 0x68;                 // I2C통신을 위한 MPU6050의 주소
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ; // 가속도(Acceleration)와 자이로(Gyro)
@@ -186,59 +187,84 @@ void loop()
     Serial.print("\n AngleGyZ:");
     Serial.print(angleGyZ);
 
-    if (angleGyZ >= 60 && angleGyZ < 90)
-    {
-        angle = 6;
-        // delay(50);
-    }
-
-    else if (angleGyZ >= 30 && angleGyZ < 60)
-    {
-        angle = 5;
-        // delay(50);
-    }
-
-    else if (angleGyZ >= 0 && angleGyZ < 30)
-    {
-        angle = 4;
-        // delay(50);
-    }
-
-    else if (angleGyZ >= -30 && angleGyZ < 0)
-    {
-        angle = 3;
-        // delay(50);
-    }
-    // }
-    // else if (angleAcX < -20 && angleAcX >= -45)
-    // {
-    if (angleGyZ >= -60 && angleGyZ < -30)
-    {
-        angle = 2;
-        // delay(50);
-    }
-
-    else if (angleGyZ >= -90 && angleGyZ < -60)
-    {
-        angle = 1;
-        // delay(50);
-    }
-
-    else if (lux < 80)
+    if (lux < 80)
     {
         angle = 7;
-        // Serial.printf("angle = %d\n", angle);
+        Serial.printf("angle = %d\n", angle);
+        // angleAcX = 0;
+        // angleAcY = 0;
+        angleGyZ = 0;
+        GyZ = 0;
+        action = 1;
+    }
+
+    else
+    {
+        if (AcY >= -6000)
+        {
+            if (angleGyZ >= 60 && angleGyZ <= 90)
+            {
+                angle = 6;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+
+            else if (angleGyZ >= 30 && angleGyZ < 60)
+            {
+                angle = 5;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+
+            else if (angleGyZ >= 0 && angleGyZ < 30)
+            {
+                angle = 4;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+
+            else if (angleGyZ >= -30 && angleGyZ < 0)
+            {
+                angle = 3;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+
+            else if (angleGyZ >= -60 && angleGyZ < -30)
+            {
+                angle = 2;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+
+            else if (angleGyZ >= -90 && angleGyZ < -60)
+            {
+                angle = 1;
+                Serial.printf("angle = %d\n", angle);
+                action = 1;
+                // delay(50);
+            }
+        }
+        else action = 0;
     }
 
     Serial.print("현재 값: ");
     Serial.println(angle);
+    Serial.printf("action: "); 
+    Serial.println(action); 
 
     loopcount++;
-    if (loopcount == 250)
+    if (loopcount >= 250 && action == 1)
     {
         char buf[10];
         sprintf(buf, "%d", angle);
         client.publish("deviceid/team3/evt/angle", buf);
         loopcount = 0;
+        action = 0;
     }
 }
