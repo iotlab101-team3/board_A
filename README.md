@@ -1,20 +1,20 @@
 # board_A
 
-### 보드 A
+### - 보드 A - 
 
 
 
 https://user-images.githubusercontent.com/90883647/145375373-c20b0eb0-9fa4-4a2c-a290-d219faf5f650.mp4
 
 
-### 보드 B_오류확인
+### - 보드 B_오류확인 -
 
 
 https://user-images.githubusercontent.com/90883647/145375423-7ab19ada-d293-49f6-bbff-e5fe11e2b004.mp4
 
 
 
-### Grafana
+### - Grafana -
 
 
 https://user-images.githubusercontent.com/90883647/145375470-de49763d-c756-4306-81eb-bef744238e93.mp4
