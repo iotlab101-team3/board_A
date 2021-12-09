@@ -17,7 +17,8 @@ https://user-images.githubusercontent.com/90883647/145375423-7ab19ada-d293-49f6-
 ### - Grafana -
 
 
-https://user-images.githubusercontent.com/90883647/145375470-de49763d-c756-4306-81eb-bef744238e93.mp4
+
+https://user-images.githubusercontent.com/90883647/145399851-8c0d6db0-8698-48d1-8089-3e34c474d6d5.mp4
 
 
 
