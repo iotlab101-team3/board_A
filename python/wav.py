@@ -3,7 +3,7 @@ import pyaudio
 import wave
 
 topic = "deviceid/team3/evt/angle"
-server = "3.84.34.84"
+server = "54.81.240.10"
 
 chunk = 1024
 
