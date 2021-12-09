@@ -1,6 +1,27 @@
 # board_A
 
-### wav.py 이용하는법
+### 보드 A
+
+
+
+https://user-images.githubusercontent.com/90883647/145375373-c20b0eb0-9fa4-4a2c-a290-d219faf5f650.mp4
+
+
+### 보드 B_오류확인
+
+
+https://user-images.githubusercontent.com/90883647/145375423-7ab19ada-d293-49f6-bbff-e5fe11e2b004.mp4
+
+
+
+### Grafana
+
+
+https://user-images.githubusercontent.com/90883647/145375470-de49763d-c756-4306-81eb-bef744238e93.mp4
+
+
+
+# ===== wav.py 이용하는법 =====
 
 .venv 환경 설정을 해준다.
 activate 해준 다음 pyaudio 라이브러리 깔 것!
@@ -11,8 +32,9 @@ python wav.py 실행
 
 (wav파일은 python 폴더 내에 있어야함)
 
-### ======= pyaudio 라이브러리 까는 방법 ======== 
+# ======= pyaudio 라이브러리 까는 방법 ======== 
 
 pip install pipwin
 
 pipwin install pyaudio
+
