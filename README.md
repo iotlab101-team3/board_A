@@ -23,9 +23,9 @@ https://user-images.githubusercontent.com/90883647/145399851-8c0d6db0-8698-48d1-
 
 ### - 발표 PPT -
 
+[IoT_3조_air_drum.pptx](https://github.com/1chae0/board_A/files/7689669/IoT_3._air_drum.pptx)
 
 
-[IoT기초_3조_에어드럼.pptx](https://github.com/1chae0/board_A/files/7689658/IoT._3._.pptx)
 
 # ===== wav.py 이용하는법 =====
 
