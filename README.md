@@ -18,6 +18,9 @@ https://user-images.githubusercontent.com/90883514/145506869-2fc00de0-42eb-4166-
 https://user-images.githubusercontent.com/90883514/145506905-da2379da-b061-4d1a-9543-19547bab42fd.MP4
 
 
+### - 주제선정 발표 PPT -
+
+[IoT기초_3조.pptx](https://github.com/iotlab101-team3/board_A/files/7691936/IoT._3.pptx)
 
 
 ### - 발표 PPT -
