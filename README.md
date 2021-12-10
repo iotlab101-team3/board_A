@@ -1,24 +1,23 @@
 # board_A
 
-### - 보드 A - 
 
-
-
-https://user-images.githubusercontent.com/90883647/145375373-c20b0eb0-9fa4-4a2c-a290-d219faf5f650.mp4
-
-
-### - 보드 B_오류확인 -
-
-
-https://user-images.githubusercontent.com/90883647/145375423-7ab19ada-d293-49f6-bbff-e5fe11e2b004.mp4
-
-
-
-### - Grafana -
+### - 보드 A 및 Grafana -
 
 
 
 https://user-images.githubusercontent.com/90883647/145399851-8c0d6db0-8698-48d1-8089-3e34c474d6d5.mp4
+
+
+### - 메트로놈 관련 -
+
+
+https://user-images.githubusercontent.com/90883514/145506869-2fc00de0-42eb-4166-980b-7dc4c2d1cfc2.MP4
+
+
+
+https://user-images.githubusercontent.com/90883514/145506905-da2379da-b061-4d1a-9543-19547bab42fd.MP4
+
+
 
 
 ### - 발표 PPT -
