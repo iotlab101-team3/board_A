@@ -21,6 +21,11 @@ https://user-images.githubusercontent.com/90883647/145375423-7ab19ada-d293-49f6-
 https://user-images.githubusercontent.com/90883647/145399851-8c0d6db0-8698-48d1-8089-3e34c474d6d5.mp4
 
 
+### - 발표 PPT -
+
+
+
+[IoT기초_3조_에어드럼.pptx](https://github.com/1chae0/board_A/files/7689658/IoT._3._.pptx)
 
 # ===== wav.py 이용하는법 =====
 
