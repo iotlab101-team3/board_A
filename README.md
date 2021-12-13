@@ -25,7 +25,7 @@ https://user-images.githubusercontent.com/90883514/145506905-da2379da-b061-4d1a-
 
 ### - 발표 PPT -
 
-[IoT_3조_air_drum.pptx](https://github.com/1chae0/board_A/files/7689669/IoT_3._air_drum.pptx)
+[IoT_3._air_drum.pptx](https://github.com/rlaalswll/board_A/files/7705664/IoT_3._air_drum.pptx)
 
 
 
